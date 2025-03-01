@@ -7,7 +7,7 @@ import posCarRental.entity.Fuel;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-08T21:57:11-0400",
+    date = "2025-03-01T06:37:35-0400",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
 )
 @Component
@@ -21,10 +21,6 @@ public class FuelMapperImpl implements FuelMapper {
 
         FuelDto fuelDto = new FuelDto();
 
-        fuelDto.setId( fuel.getId() );
-        fuelDto.setName( fuel.getName() );
-        fuelDto.setDescription( fuel.getDescription() );
-
         return fuelDto;
     }
 
@@ -35,10 +31,6 @@ public class FuelMapperImpl implements FuelMapper {
         }
 
         Fuel fuel = new Fuel();
-
-        fuel.setId( fuelDto.getId() );
-        fuel.setName( fuelDto.getName() );
-        fuel.setDescription( fuelDto.getDescription() );
 
         return fuel;
     }

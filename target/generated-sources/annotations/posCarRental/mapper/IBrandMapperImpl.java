@@ -7,7 +7,7 @@ import posCarRental.entity.Brand;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-02-08T21:57:11-0400",
+    date = "2025-03-01T06:37:34-0400",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
 )
 @Component
@@ -21,10 +21,6 @@ public class IBrandMapperImpl implements IBrandMapper {
 
         BrandDto brandDto = new BrandDto();
 
-        brandDto.setId( brand.getId() );
-        brandDto.setName( brand.getName() );
-        brandDto.setDescription( brand.getDescription() );
-
         return brandDto;
     }
 
@@ -35,10 +31,6 @@ public class IBrandMapperImpl implements IBrandMapper {
         }
 
         Brand brand = new Brand();
-
-        brand.setId( brandDto.getId() );
-        brand.setName( brandDto.getName() );
-        brand.setDescription( brandDto.getDescription() );
 
         return brand;
     }
