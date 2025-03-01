@@ -1,30 +1,18 @@
-# Usar una imagen base con Maven y Java instalado
-FROM maven:3.8.4-openjdk-17 AS build
+# Stage 1: Build the application
+FROM maven:3.9.7-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Establecer el directorio de trabajo dentro del contenedor
+# Stage 2: Run the application
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
-# Copiar el archivo pom.xml y descargar las dependencias
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
+# Copy the JAR file from the build stage
+COPY --from=build /app/target/santa-cruz-alimento-backend-0.0.1.jar app.jar
 
-# Copiar el código fuente
-COPY src ./src
-
-# Compilar y empaquetar la aplicación
-RUN mvn package -DskipTests
-
-# Usar una imagen base más ligera para la ejecución
-FROM openjdk:17-jdk-alpine
-
-# Establecer el directorio de trabajo dentro del contenedor
-WORKDIR /app
-
-# Copiar el archivo JAR construido desde la etapa de construcción
-COPY --from=build /app/target/posCarRental-0.0.1-SNAPSHOT.jar app.jar
-
-# Exponer el puerto en el que corre la aplicación
+# Expose the application port
 EXPOSE 8080
 
-# Comando para ejecutar la aplicación
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
